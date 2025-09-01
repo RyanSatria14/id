@@ -201,6 +201,7 @@ img {
 .home__title {
   font-size: var(--big-font-size);
   margin-bottom: var(--mb-5);
+  color: var(--first-color);
 }
 
 .home__title-color {
@@ -528,3 +529,5 @@ img {
     width: 450px;
   }
 }
+
+/*tambahan*/
