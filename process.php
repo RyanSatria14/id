@@ -1,4 +1,9 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+
 header('Content-Type: application/json');
 
 // Ganti dengan API key kamu
@@ -38,3 +43,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['prompt'])) {
     echo json_encode(['response' => $aiResponse]);
 }
 ?>
+
