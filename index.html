@@ -1,349 +1,388 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="shortcut icon" type="image/png" href="assets/img/aku.png" />
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <title>Ryan Satria</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="js/ripple.js"></script>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .chat-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+            background-color: #fff;
+            border-radius: .5rem;
+            box-shadow: 0px 4px 25px rgba(14, 36, 49, 0.15);
+            display: flex;
+            flex-direction: column;
+            height: 80vh; 
+        }
 
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        .chat-header {
+            padding: var(--mb-2);
+            text-align: center;
+            font-size: var(--h2-font-size);
+            font-weight: var(--font-semi);
+            color: var(--first-color);
+            border-bottom: 1px solid var(--first-color);
+        }
 
-        <link rel="stylesheet" href="assets/css/styles.css">
-        <link rel="shortcut icon" type="image/png" href="assets/img/aku.png" />
-        <!-- =====BOX ICONS===== -->
-        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+        .chat-box {
+            flex-grow: 1;
+            padding: var(--mb-2);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
 
-        <title>Ryan Satria</title>
-        
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-        <script src="js/ripple.js"></script>
+        .message {
+            max-width: 80%;
+            padding: .75rem 1.25rem;
+            border-radius: .5rem;
+            box-shadow: 0px 4px 15px rgba(14, 36, 49, 0.08);
+            line-height: 1.4;
+            font-size: var(--normal-font-size);
+            word-wrap: break-word;
+        }
 
-    </head>
-    <body>
-        <!--===== HEADER =====-->
-        <!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/68ba4dbc4c5fd61923189b0d/1j4brvadn';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
-        <header class="l-header">
-            <nav class="nav bd-grid">
+        .user-message {
+            background-color: var(--first-color);
+            color: #fff;
+            align-self: flex-end;
+        }
+
+        .ai-message {
+            background-color: #f0f0f0;
+            color: var(--second-color);
+            align-self: flex-start;
+        }
+
+        .chat-input-area {
+            border-top: 1px solid rgba(146, 161, 176, 0.15);
+            padding: var(--mb-2);
+            display: flex;
+            gap: 1rem;
+        }
+
+        #user-input {
+            flex-grow: 1;
+            border: 1px solid var(--second-color);
+            padding: .75rem 1rem;
+            border-radius: .5rem;
+            font-size: var(--normal-font-size);
+            outline: none;
+        }
+
+        #user-input:focus {
+            border-color: var(--first-color);
+        }
+
+        .chat-input-area .button {
+            padding: .75rem 2.5rem;
+            border: none;
+            cursor: pointer;
+            background-color: var(--first-color);
+            color: white;
+            border-radius: .5rem;
+        }
+    </style>
+</head>
+<body>
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function() {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/68ba4dbc4c5fd61923189b0d/1j4brvadn';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <header class="l-header">
+        <nav class="nav bd-grid">
+            <div>
+                <a href="" class="nav__logo">Ryan</a>
+            </div>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="#home" class="nav__link active">Home</a></li>
+                    <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
+                    <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
+                    <li class="nav__item"><a href="#work" class="nav__link">Project</a></li>
+                    <li class="nav__item"><a href="#chatAi" class="nav__link">Chat Ai</a></li>
+                    <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
+                </ul>
+            </div>
+            <div class="nav__toggle" id="nav-toggle">
+                <i class='bx bx-menu'></i>
+            </div>
+        </nav>
+    </header>
+
+    <main class="l-main">
+        <section class="home bd-grid" id="home">
+            <div class="home__data">
+                <h1 class="home__title">Hi,<br>I'am <span class="typing-text"></span></h1>
+                <div id="particles-js"></div>
+                <audio controls autoplay class="button">
+                    <source src="suaraAI.mpeg" type="audio/mpeg">
+                    Browsermu tidak mendukung tag audio, upgrade donk!
+                </audio>
+                <br>
+                <a href="https://wa.me/6289632836213" class="button">Contact</a>
+            </div>
+            <div class="home__social">
+                <a href="https://drive.google.com/file/d/1T2PflMIhkeYkcBE2BzM0mqBEbmUT4Ajt/view?usp=sharing" class="home__social-icon"><i class='bx bxl-html5'></i></a>
+                <a href="https://github.com/RyanSatria14" class="home__social-icon"><i class='bx bxl-github' ></i></a>
+                <a href="https://www.instagram.com/ryansatria_9" class="home__social-icon"><i class='bx bxl-instagram' ></i></a>
+                <a href="https://www.youtube.com/@RyanSatria9" class="home__social-icon"><i class='bx bxl-youtube' ></i></a>
+            </div>
+            <div class="home__img">
+                <svg class="home__blob" viewBox="0 0 479 467" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <mask id="mask0" mask-type="alpha">
+                        <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
+                    </mask>
+                    <g mask="url(#mask0)">
+                        <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
+                        <image class="home__blob-img" x="50" y="60" href="assets/img/aku.png"/>
+                    </g>
+                </svg>
+            </div>
+        </section>
+
+        <section class="about section " id="about">
+            <h2 class="section-title">About</h2>
+            <div class="work__container bd-grid">
+                <div class="work__img">
+                    <img src="assets/img/aku.JPG" alt="">
+                </div>
                 <div>
-                    <a href="" class="nav__logo">Ryan</a>
+                    <h2 class="about__subtitle">I'am Ryan</h2>
+                    <p class="about__text">Bachelor's degree in Informatics and I have interest high learning and the principle of never giving up keep trying putting forward honesty in various matters so that life is better and useful for myself and those around me. Great anallytical skills, good communicative, good attitude, dicipline, hard worker and responsible.</p>
                 </div>
-
-                <div class="nav__menu" id="nav-menu">
-                    <ul class="nav__list">
-                        <li class="nav__item"><a href="#home" class="nav__link active">Home</a></li>
-                        <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
-                        <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
-                        <li class="nav__item"><a href="#work" class="nav__link">Project</a></li>
-                        <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
-                    </ul>
-                </div>
-
-                <div class="nav__toggle" id="nav-toggle">
-                    <i class='bx bx-menu'></i>
-                </div>
-            </nav>
-        </header>
-
-        <main class="l-main">
-            <!--===== HOME =====-->
-            <section class="home bd-grid" id="home">
-
-                <div class="home__data">
-                    
-                    <h1 class="home__title">Hi,<br>I'am <span class="typing-text"></span></h1>
-
-<div id="particles-js"></div>
-                    <audio controls autoplay class="button">
-                        <source src="suaraAI.mpeg" type="audio/mpeg">
-                        Browsermu tidak mendukung tag audio, upgrade donk!
-                      </audio>
-                      <br>
-
-                    <a href="https://wa.me/6289632836213" class="button">Contact</a>
-                </div>
-
-                <div class="home__social">
-                    <a href="https://drive.google.com/file/d/1T2PflMIhkeYkcBE2BzM0mqBEbmUT4Ajt/view?usp=sharing" class="home__social-icon"><i class='bx bxl-html5'></i></a>
-                    <!-- <a href="" class="home__social-icon"><i class='bx bxl-behance' ></i></a> -->
-                    <a href="https://github.com/RyanSatria14" class="home__social-icon"><i class='bx bxl-github' ></i></a>
-                    <a href="https://www.instagram.com/ryansatria_9" class="home__social-icon"><i class='bx bxl-instagram' ></i></a>
-                    <a href="https://www.youtube.com/@RyanSatria9" class="home__social-icon"><i class='bx bxl-youtube' ></i></a>
-                </div>
-
-                <div class="home__img">
-                    <svg class="home__blob" viewBox="0 0 479 467" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <mask id="mask0" mask-type="alpha">
-                            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
-                        </mask>
-                        <g mask="url(#mask0)">
-                            <path d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"/>
-                            <image class="home__blob-img" x="50" y="60" href="assets/img/aku.png"/>
-                        </g>
-                    </svg>
-                </div>
-            </section>
-
-            <!--===== ABOUT =====-->
-            <section class="about section " id="about">
-                <h2 class="section-title">About</h2>
-
-                <div class="work__container bd-grid">
-                    <div class="work__img">
-                        <img  src="assets/img/aku.JPG" alt="" >
-                    </div>
-                    
-                    <div>
-                        <h2 class="about__subtitle">I'am Ryan</h2>
-                        <p class="about__text">Bachelor's degree in Informatics and I have interest high learning and the
-                            principle of never giving up keep trying
-                            putting forward honesty in various
-                            matters so that life is better and useful
-                            for myself and those around me. Great
-                            anallytical skills, good communicative,
-                            good attitude, dicipline, hard worker
-                            and responsible.</p>           
-                    </div>       
-                    
-                    <!-- <div class="about__container bd-grid">
-                        <div class="about__img">
-                            <img  src="assets/img/aku2.jpg" alt="">
-                        </div> -->
-                    <div class="about__container bd-grid">
-                     
+                <div class="about__container bd-grid">
                     <video width="320" height="240" controls>
-                    <source src="vidio.mp4" type="video/mp4">
-                    <source src="vidio.mp4" type="video/ogg">
-                    Your browser does not support the video tag.
+                        <source src="vidio.mp4" type="video/mp4">
+                        <source src="vidio.mp4" type="video/ogg">
+                        Your browser does not support the video tag.
                     </video>
-                    
-                        </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!--===== SKILLS =====-->
-            <section class="skills section" id="skills">
-                <h2 class="section-title">Skills</h2>
-
-                <div class="skills__container bd-grid">          
-                    <div>
-                        <h2 class="skills__subtitle">Skills</h2>
-                        <p class="skills__text">Soft Skills & Hard Skills :</p>
-                        <div class="skills__data">
-                            <div class="skills__names">
-                                <i class='bx bxs-paint skills__icon'></i>
-                                <span class="skills__name">Microsoft Office</span>
-                            </div>
-                            <div class="skills__bar skills__html">
-
-                            </div>
-                            <div>
-                                <span class="skills__percentage">95%</span>
-                            </div>
+        <section class="skills section" id="skills">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills__container bd-grid">
+                <div>
+                    <h2 class="skills__subtitle">Skills</h2>
+                    <p class="skills__text">Soft Skills & Hard Skills :</p>
+                    <div class="skills__data">
+                        <div class="skills__names">
+                            <i class='bx bxs-paint skills__icon'></i>
+                            <span class="skills__name">Microsoft Office</span>
                         </div>
-                        <div class="skills__data">
-                            <div class="skills__names">
-                                </i><i class='bx bxl-html5 skills__icon'></i>
-                                <span class="skills__name">Web Development</span>
-                            </div>
-                            <div class="skills__bar skills__css">
-                                
-                            </div>
-                            <div>
-                                <span class="skills__percentage">85%</span>
-                            </div>
+                        <div class="skills__bar skills__html"></div>
+                        <div>
+                            <span class="skills__percentage">95%</span>
                         </div>
-                        
-                        <div class="skills__data">
-                            <div class="skills__names">
-                                <i class='bx bxs-paint skills__icon'></i>
-                                <span class="skills__name">Design Graphic</span>
-                            </div>
-                            <div class="skills__bar skills__ux">
-                                
-                            </div>
-                            <div>
-                                <span class="skills__percentage">90%</span>
-                            </div>
-                        </div>
-
-                        <div class="skills__data">
-                            <div class="skills__names">
-                                <i class='bx bxs-paint skills__icon'></i>
-                                <span class="skills__name">Computer Networks &
-                                    Troubleshooting</span>
-                            </div>
-                            <div class="skills__bar skills__ux">
-                                
-                            </div>
-                            <div>
-                                <span class="skills__percentage">90%</span>
-                            </div>
-                        </div>
-
-                        <div class="skills__data">
-                            <div class="skills__names">
-                                <i class='bx bxs-paint skills__icon'></i>
-                                <span class="skills__name">Teamwork</span>
-                            </div>
-                            <div class="skills__bar skills__ux">
-                                
-                            </div>
-                            <div>
-                                <span class="skills__percentage">95%</span>
-                            </div>
-                        </div>
-
                     </div>
-
-                    <div class="about__container bd-grid">
-                        <div class="about__img">
-                            <img src="assets/img/foto.jpg" alt="" >
+                    <div class="skills__data">
+                        <div class="skills__names">
+                            <i class='bx bxl-html5 skills__icon'></i>
+                            <span class="skills__name">Web Development</span>
                         </div>
-
-                        <div class="about__container bd-grid">
-                            <div class="about__img" >
-                                <img src="assets/img/foto2.jpg" id="rplimg" alt="" >
-                            </div>
-                    
-                            <script type="text/javascript">
-                                jQuery(document).ready(function() {
-                                    jQuery('#rplimg').waterripple({onclick: true});
-                                });
-                                </script>
-
-
-                            <!-- <div class="about__container bd-grid">
-                                <div class="about__img">
-                                    <img src="assets/img/foto3.jpg" alt="">
-                                </div>
-
+                        <div class="skills__bar skills__css"></div>
+                        <div>
+                            <span class="skills__percentage">85%</span>
+                        </div>
+                    </div>
+                    <div class="skills__data">
+                        <div class="skills__names">
+                            <i class='bx bxs-paint skills__icon'></i>
+                            <span class="skills__name">Design Graphic</span>
+                        </div>
+                        <div class="skills__bar skills__ux"></div>
+                        <div>
+                            <span class="skills__percentage">90%</span>
+                        </div>
+                    </div>
+                    <div class="skills__data">
+                        <div class="skills__names">
+                            <i class='bx bxs-paint skills__icon'></i>
+                            <span class="skills__name">Computer Networks & Troubleshooting</span>
+                        </div>
+                        <div class="skills__bar skills__ux"></div>
+                        <div>
+                            <span class="skills__percentage">90%</span>
+                        </div>
+                    </div>
+                    <div class="skills__data">
+                        <div class="skills__names">
+                            <i class='bx bxs-paint skills__icon'></i>
+                            <span class="skills__name">Teamwork</span>
+                        </div>
+                        <div class="skills__bar skills__ux"></div>
+                        <div>
+                            <span class="skills__percentage">95%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about__container bd-grid">
+                    <div class="about__img">
+                        <img src="assets/img/foto.jpg" alt="">
+                    </div>
                     <div class="about__container bd-grid">
                         <div class="about__img">
-                            <img src="assets/img/foto4.jpg" alt="">
-                        </div> -->
-                    
-                
+                            <img src="assets/img/foto2.jpg" id="rplimg" alt="">
+                        </div>
+                        <script type="text/javascript">
+                            jQuery(document).ready(function() {
+                                jQuery('#rplimg').waterripple({onclick: true});
+                            });
+                        </script>
+                    </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!--===== WORK =====-->
-            <section class="work section" id="work">
-                <h2 class="section-title">Project</h2>
-
-                <div class="work__container bd-grid">
-                    <a href="https://miyoshilaundry.000webhostapp.com/" class="work__img">
-                        <img src="assets/img/laundry.png" alt="">
-                        <p><b><center>Sistem Pelayanan dan Mananjemen Laundry</center></b></p>
-                    </a>
-                    <a href="https://github.com/RyanSatria14" class="work__img">
-                        <img src="assets/img/github.png" alt="">
-                        <p><b><center>Github</center></b></p>
-                    </a>
-
-                     <a  class="work__img">
-                        
-
-                        <svg width="100%" height="150" xmlns="http://www.w3.org/2000/svg">
+        <section class="work section" id="work">
+            <h2 class="section-title">Project</h2>
+            <div class="work__container bd-grid">
+                <a href="https://miyoshilaundry.000webhostapp.com/" class="work__img">
+                    <img src="assets/img/laundry.png" alt="">
+                    <p><b><center>Sistem Pelayanan dan Mananjemen Laundry</center></b></p>
+                </a>
+                <a href="https://github.com/RyanSatria14" class="work__img">
+                    <img src="assets/img/github.png" alt="">
+                    <p><b><center>Github</center></b></p>
+                </a>
+                <a class="work__img">
+                    <svg width="100%" height="150" xmlns="http://www.w3.org/2000/svg">
                         <rect x="0" y="18" width="0" height="45" style="stroke:green;fill:none;">
-                            <animateMotion
-                            path="M0,0 q60,100 100,0 q60,-20 100,0"
-                            begin="0s"
-                            dur="10s"
-                            repeatCount="indefinite" />
+                            <animateMotion path="M0,0 q60,100 100,0 q60,-20 100,0" begin="0s" dur="10s" repeatCount="indefinite" />
                         </rect>
                         <text x="50" y="50" style="font-family:Verdana;font-size:32">On Progress:)
-                            <animateMotion
-                            path="M0,0 q60,100 100,0 q60,-20 100,0"
-                            begin="0s"
-                            dur="10s"
-                            repeatCount="indefinite" />
+                            <animateMotion path="M0,0 q60,100 100,0 q60,-20 100,0" begin="0s" dur="10s" repeatCount="indefinite" />
                         </text>
-                        </svg>
+                    </svg>
+                    <svg width="100%" height="150" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="18" width="0" height="45" style="stroke:green;fill:none;">
+                            <animateMotion path="M0,0 q60,100 100,0 q60,-20 100,0" begin="0s" dur="10s" repeatCount="indefinite" />
+                        </rect>
+                        <text x="50" y="50" style="font-family:Verdana;font-size:32">On Progress:)
+                            <animateMotion path="M0,0 q60,100 100,0 q60,-20 100,0" begin="0s" dur="10s" repeatCount="indefinite" />
+                        </text>
+                    </svg>
+                </a>
+            </div>
+        </section>
 
-                        <svg width="100%" height="150" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="0" y="18" width="0" height="45" style="stroke:green;fill:none;">
-                                <animateMotion
-                                path="M0,0 q60,100 100,0 q60,-20 100,0"
-                                begin="0s"
-                                dur="10s"
-                                repeatCount="indefinite" />
-                            </rect>
-                            <text x="50" y="50" style="font-family:Verdana;font-size:32">On Progress:)
-                                <animateMotion
-                                path="M0,0 q60,100 100,0 q60,-20 100,0"
-                                begin="0s"
-                                dur="10s"
-                                repeatCount="indefinite" />
-                            </text>
-                            </svg>
-
-                            
-
-                    </a>
-                </div>
-            </section>
-
-            <!--===== CONTACT =====-->
-            <!-- <section class="contact section" id="contact">
-                <h2 class="section-title">Contact</h2>
-
-                <div class="contact__container bd-grid">
-                    <form action="" class="contact__form">
-                        <div class="footer__social">
-                            <a href="#" class="footer__icon"><i class='bx bxl-facebook' ></i></a>
-                            <a href="#" class="footer__icon"><i class='bx bxl-instagram' ></i></a>
-                            <a href="#" class="footer__icon"><i class='bx bxl-twitter' ></i></a>
+        <section class="contact section" id="chatAi">
+            <h2 class="section-title">Chat AI</h2>
+            <div class="bd-grid">
+                <div class="chat-container">
+                    <div class="chat-header">
+                        Chat Cerdas dengan AI
+                    </div>
+                    <div class="chat-box" id="chat-box">
+                        <div class="message-wrapper ai-message-wrapper">
+                            <div class="message ai-message">Halo! Saya AI, siap membantu Anda. Silakan ketik pertanyaan Anda.</div>
                         </div>
+                    </div>
+                    <form id="chat-form" class="chat-input-area">
+                        <input type="text" id="user-input" placeholder="Ketik pesan Anda di sini..." autocomplete="off">
+                        <button type="submit" class="button">Kirim</button>
                     </form>
                 </div>
-            </section> -->
-        </main>
-
-        <!--===== FOOTER =====-->
-        <section class="contact section" id="contact">
-        <footer class="footer">
-            <p class="footer__title">Contact</p>
-            <div class="footer__social">
-                <p class="footer__icon">Email : Ryansatria149@gmail.com</p><br>
-                <a class="footer__icon" href="https://wa.me/6289632836213" class="home__social-icon"><i class='bx bxl-whatsapp' ></i> : 0896-3283-6213</a>
             </div>
-            <p class="footer__copy">&#169; Ryan Satria. always be update :)</p>
+        </section>
 
-<iframe src="https://www.google.com/maps/embed?pb=!4v1716784763656!6m8!1m7!1s9DWBktvWw8U5QO7n4AINUQ!2m2!1d-5.383771651993099!2d105.2561032111776!3f194.42681938658768!4f-3.1817341930708096!5f0.5970117501821992" width="400" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        <center>
-           <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=42f0b74500275a714f6663604cb9c1196886d385'></script>
-            <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1181424/t/0"></script>
-        </center>
-        </footer>
+        <section class="contact section" id="contact">
+            <footer class="footer">
+                <p class="footer__title">Contact</p>
+                <div class="footer__social">
+                    <p class="footer__icon">Email : Ryansatria149@gmail.com</p><br>
+                    <a class="footer__icon" href="https://wa.me/6289632836213"><i class='bx bxl-whatsapp'></i> : 0896-3283-6213</a>
+                </div>
+                <p class="footer__copy">© Ryan Satria. always be update :)</p>
+                <iframe src="https://www.google.com/maps/embed?pb=!4v1716784763656!6m8!1m7!1s9DWBktvWw8U5QO7n4AINUQ!2m2!1d-5.383771651993099!2d105.2561032111776!3f194.42681938658768!4f-3.1817341930708096!5f0.5970117501821992" width="400" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <center>
+                    <script type='text/javascript' src='https://www.freevisitorcounters.com/auth.php?id=42f0b74500275a714f6663604cb9c1196886d385'></script>
+                    <script type="text/javascript" src="https://www.freevisitorcounters.com/en/home/counter/1181424/t/0"></script>
+                </center>
+            </footer>
+        </section>
 
-    </section>
-
-    <!-- particle.js links -->
-<script src="./assets/js/particles.min.js"></script>
-<script src="./assets/js/app.js"></script>
-    
-        <!--===== SCROLL REVEAL =====-->
-        <script src="https://unpkg.com/scrollreveal"></script>
-
-        <!--===== MAIN JS =====-->
-        <!-- typed.js cdn -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.5/typed.min.js" integrity="sha512-1KbKusm/hAtkX5FScVR5G36wodIMnVd/aP04af06iyQTkD17szAMGNmxfNH+tEuFp3Og/P5G32L1qEC47CZbUQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="assets/js/main.js"></script>
         
 
+    </main>
 
-    </body>
+    <script src="./assets/js/particles.min.js"></script>
+    <script src="./assets/js/app.js"></script>
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.5/typed.min.js" integrity="sha512-1KbKusm/hAtkX5FScVR5G36wodIMnVd/aP04af06iyQTkD17szAMGNmxfNH+tEuFp3Og/P5G32L1qEC47CZbUQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="assets/js/main.js"></script>
+
+    <script>
+        const chatForm = document.getElementById('chat-form');
+        const userInput = document.getElementById('user-input');
+        const chatBox = document.getElementById('chat-box');
+
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const message = userInput.value;
+            if (message.trim() === '') return;
+
+            // Tampilkan pesan pengguna
+            const userMessageDiv = document.createElement('div');
+            userMessageDiv.className = 'message user-message';
+            userMessageDiv.textContent = message;
+            chatBox.appendChild(userMessageDiv);
+            userInput.value = '';
+            scrollChatToBottom();
+
+            // Kirim pesan ke server PHP
+            try {
+                const response = await fetch('process.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `prompt=${encodeURIComponent(message)}`
+                });
+                const data = await response.json();
+
+                // Tampilkan balasan AI
+                const aiMessageDiv = document.createElement('div');
+                aiMessageDiv.className = 'message ai-message';
+                aiMessageDiv.textContent = data.response;
+                chatBox.appendChild(aiMessageDiv);
+            } catch (error) {
+                console.error('Error fetching AI response:', error);
+                const errorMessageDiv = document.createElement('div');
+                errorMessageDiv.className = 'message ai-message';
+                errorMessageDiv.textContent = 'Maaf, terjadi kesalahan saat menghubungi Gemini AI. Silakan coba lagi.';
+                chatBox.appendChild(errorMessageDiv);
+            } finally {
+                scrollChatToBottom();
+            }
+        });
+
+        function scrollChatToBottom() {
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        // Auto-scroll to bottom on initial load
+        document.addEventListener('DOMContentLoaded', scrollChatToBottom);
+    </script>
+</body>
 </html>
-
-
