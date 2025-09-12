@@ -367,7 +367,7 @@
                 const data = await response.json();
                 console.log(data);
 
-                const aiReply = data.candidates?.[1]?.content?.parts?.[1]?.text || "⚠️ Tidak ada respon dari AI ⚠️, Dalam Tahap Pengembangan dan Belajar";
+                const aiReply = data.candidates?.[0]?.content?.parts?.[0]?.text || "⚠️ Tidak ada respon dari AI ⚠️";
 
                 const aiMessageDiv = document.createElement('div');
                 aiMessageDiv.className = 'message ai-message';
