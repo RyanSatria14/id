@@ -37,7 +37,6 @@
                     <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
                     <li class="nav__item"><a href="#work" class="nav__link">Project</a></li>
                     <li class="nav__item"><a href="#chatAi" class="nav__link">Chat Ai</a></li>
-                    <li class="nav__item"><a href="#photoku" class="nav__link">Photoku</a></li>
                     <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
                 </ul>
             </div>
@@ -229,33 +228,6 @@
             </div>
         </section>
 
-            <section class="contact section" id="photoku">
-  <h2 class="section-title">Photoku</h2>
-
-  <div class="container">
-    <div class="box">
-      <span style="--i:1"><img src="img/img1.jpg" alt=""></span>
-      <span style="--i:2"><img src="img/img2.jpg" alt=""></span>
-      <span style="--i:3"><img src="img/img3.jpg" alt=""></span>
-      <span style="--i:4"><img src="img/img4.jpg" alt=""></span>
-      <span style="--i:5"><img src="img/img5.jpg" alt=""></span>
-      <span style="--i:6"><img src="img/img6.jpg" alt=""></span>
-      <span style="--i:7"><img src="img/img7.jpg" alt=""></span>
-      <span style="--i:8"><img src="img/img8.jpg" alt=""></span>
-    </div>
-
-    <div class="lightbox" id="lightbox">
-  <img src="" alt="Preview">
-</div>
-
-
-    <!-- tombol prev & next -->
-    <div class="btns">
-      <div class="btn prev"></div>
-      <div class="btn next"></div>
-    </div>
-  </div>
-</section>
 
         <section class="contact section" id="contact">
             <footer class="footer">
@@ -387,44 +359,7 @@
         }
     </script>
 
-    <script>
-  const prev = document.querySelector(".btn.prev");
-  const next = document.querySelector(".btn.next");
-  const box = document.querySelector(".box");
-
-  let degrees = 0;
-
-  prev.addEventListener("click", () => {
-    degrees += 45;
-    box.style.transform = `perspective(1000px) rotateY(${degrees}deg)`;
-  });
-
-  next.addEventListener("click", () => {
-    degrees -= 45;
-    box.style.transform = `perspective(1000px) rotateY(${degrees}deg)`;
-  });
-</script>
-
-<script>
-  const images = document.querySelectorAll(".box span img");
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImg = lightbox.querySelector("img");
-
-  images.forEach(img => {
-    img.addEventListener("click", () => {
-      lightbox.classList.add("active");
-      lightboxImg.src = img.src;
-    });
-  });
-
-  // Tutup lightbox kalau di klik overlay / tombol ✖
-  lightbox.addEventListener("click", (e) => {
-    if (e.target !== lightboxImg) {
-      lightbox.classList.remove("active");
-    }
-  });
-</script>
-
+ 
 
 </body>
 </html>
