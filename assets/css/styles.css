@@ -853,3 +853,27 @@ img {
     }
 }
 
+.chat-3d-wrapper {
+    position: relative;
+    height: 600px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+#ai-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.chat-container.glass {
+    position: relative;
+    z-index: 2;
+    backdrop-filter: blur(14px);
+    background: rgba(0,0,0,0.45);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    height: 100%;
+    color: #fff;
+}
+
