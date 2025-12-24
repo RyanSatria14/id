@@ -69,15 +69,7 @@ document.addEventListener('visibilitychange',
     });
 
 
-// <!-- typed js effect starts -->
-var typed = new Typed(".typing-text", {
-    strings: ["frontend development", "backend development", "web designing", "android development", "web development"],
-    loop: true,
-    typeSpeed: 50,
-    backSpeed: 25,
-    backDelay: 500,
-});
-// <!-- typed js effect ends -->
+
 
 async function fetchData(type = "skills") {
     let response
@@ -211,6 +203,16 @@ const srtop = ScrollReveal({
     reset: true
 });
 
+// <!-- typed js effect starts -->
+var typed = new Typed(".typing-text", {
+    strings: ["frontend development", "backend development", "web designing", "android development", "web development"],
+    loop: true,
+    typeSpeed: 50,
+    backSpeed: 25,
+    backDelay: 500,
+});
+// <!-- typed js effect ends -->
+
 /* SCROLL HOME */
 srtop.reveal('.home .content h3', { delay: 200 });
 srtop.reveal('.home .content p', { delay: 200 });
@@ -249,3 +251,4 @@ srtop.reveal('.experience .timeline .container', { interval: 400 });
 /* SCROLL CONTACT */
 srtop.reveal('.contact .container', { delay: 400 });
 srtop.reveal('.contact .container .form-group', { delay: 400 });
+
