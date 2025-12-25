@@ -877,3 +877,26 @@ img {
     color: #fff;
 }
 
+/* MODE KARTUN */
+.cartoon-mode {
+    cursor: url("https://cur.cursors-4u.net/anime/ani-10/ani963.cur"), auto;
+}
+
+/* Trail cahaya kartun */
+.cartoon-trail {
+    position: fixed;
+    width: 16px;
+    height: 16px;
+    background: radial-gradient(circle, #ffeb3b 0%, rgba(255,235,59,0.5) 40%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    animation: cartoonFade 0.5s linear forwards;
+}
+
+@keyframes cartoonFade {
+    to {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
